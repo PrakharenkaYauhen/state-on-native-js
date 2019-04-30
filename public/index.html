@@ -1,38 +1,198 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="utf-8" />
-    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <!--
-      manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
+    <title>STATE on js</title>
+</head>
 
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
-    <title>React App</title>
-  </head>
-  <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
+<body>
 
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
+    <div id="root">
 
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
-  </body>
+        <div class='add-task'>
+            <label for="new-task"></label>
+            <input type="text" name="" id="new-task">
+            <button id="add-new-task">new task</button>
+        </div>
+
+        <div class='task'>
+            <ol class='task-list' id="task-list">
+
+            </ol>
+        </div>
+
+        <div id='modal'></div>
+
+    </div>
+
+    <script>
+        const root = document.getElementById('root');
+        const taskList = document.getElementById('task-list');
+        const addTaskInput = document.getElementById('new-task');
+        const addTaskButton = document.getElementById('add-new-task');
+        let modalTaskButton = document.getElementById('modal-task');
+        const modal = document.getElementById('modal');
+        let modalActive = false;
+
+        const createStore = (reducer, initialState) => {
+            const store = {};
+            store.state = initialState;
+            store.listeners = [];
+            store.getState = () => store.state;
+            store.subscribe = listener => {
+                store.listeners.push(listener);
+            };
+            store.dispatch = action => {
+                console.log('> Action', action);
+                console.log(store.state, action);
+                store.state = reducer(store.state, action);
+                store.listeners.forEach(listener => listener());
+            };
+            return store;
+        };
+
+        const getInitialState = () => {
+            return {
+                task: [`The prime task`],
+                modalActive: false,
+            };
+        };
+
+        const reducer = (state = getInitialState(), action) => {
+            switch (action.type) {
+
+                case 'ADD-TASK-IN-THE-LIST':
+                    let newTasksArr = state.task.slice();
+                    newTasksArr.push(action.payload.task);
+                    nextState = {
+                        task: newTasksArr,
+                    }
+                    addTaskInput.value = '';
+                    addTaskInput.focus();
+                    return nextState;
+
+                case 'DELETE-TASK-IN-THE-LIST':
+                    let delTasksArr = state.task;
+                    let indexDelElement = delTasksArr.indexOf(action.payload.task.split('<span')[0]);
+                    if (indexDelElement !== -1) {
+                        delTasksArr.splice(indexDelElement, 1);
+                        nextState = {
+                            task: delTasksArr,
+                        }
+                    }
+                    return nextState;
+
+                case 'MODAL-TASK-IN-THE-LIST':
+                console.log(state.modalActive)
+                    nextState = {
+                        modalActive: action.payload.modalActive,
+                    }
+                    return nextState;
+
+                default:
+                    return state;
+            }
+        };
+
+        const store = createStore(reducer);
+
+        store.subscribe(() => {
+            const state = store.getState();
+            const task = state.task;
+            const modalStatus = state.modalActive;
+            console.log(state);
+            console.log(task);
+
+            if (task == undefined || task.length == 0) {
+                // taskList.innerHTML = 'There is no any task yet';
+                taskList.innerHTML = '';
+                let button = document.createElement('button');
+                button.classList.add('modal-task');
+                button.setAttribute('id', 'modal-task');
+                button.innerHTML = 'add a new task';
+                taskList.appendChild(button);
+                modalTaskButton = document.getElementById('modal-task');
+                console.log(modalTaskButton);
+            } else {
+                taskList.innerHTML = '';
+                for (let i = 0; i < task.length; i++) {
+                    let li = document.createElement('li');
+                    let span = document.createElement('span');
+                    li.innerHTML = task[i];
+                    span.innerHTML = ' X';
+                    span.classList.add('delete-task')
+                    li.appendChild(span);
+                    taskList.appendChild(li);
+                    span.addEventListener('click', deleteTask);
+                }
+            }
+
+            console.log(modalStatus);
+            if (modalStatus) {
+                modal.classList.add('modal-vision')
+            } else {
+                modal.classList.remove('modal-vision')
+            }
+        });
+
+        store.dispatch({}); // Sets the inital state
+
+
+
+        addTaskButton.addEventListener('click', () => {
+
+            if (addTaskInput.value.length !== 0) {
+                // console.log('----- Previous state', store.getState());
+                store.dispatch({
+                    type: 'ADD-TASK-IN-THE-LIST',
+                    payload: {
+                        task: addTaskInput.value,
+                    },
+                })
+            } else {
+                return
+            }
+            // console.log('+++++ New state', store.getState());
+
+        });
+
+
+        let deleteTaskButton = document.getElementsByClassName('delete-task');
+
+        for (let i = 0; i < deleteTaskButton.length; i++) {
+            deleteTaskButton[i].addEventListener('click', deleteTask);
+        }
+
+        function deleteTask(e) {
+            // console.log('----- Previous state', store.getState());
+            store.dispatch({
+                type: 'DELETE-TASK-IN-THE-LIST',
+                payload: {
+                    task: e.target.parentNode.innerHTML,
+                },
+            })
+            // console.log('+++++ New state', store.getState());
+        }
+
+        document.addEventListener('click', e => {
+            var target = e.target;
+            if (target.classList.contains('modal-task')) {
+                console.log(modalActive);
+                modalActive = !modalActive ? true : false;
+                console.log(modalActive);
+                store.dispatch({
+                    type: 'MODAL-TASK-IN-THE-LIST',
+                    payload: {
+                        modalActive: modalActive,
+                    },
+                })
+            }
+        });
+        
+    </script>
+</body>
+
 </html>
