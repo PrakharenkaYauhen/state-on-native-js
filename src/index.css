@@ -1,22 +1,130 @@
 body {
     margin: 0;
     padding: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-        "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-        sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
-
-code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-        monospace;
+    background-image: url('./natures-temples.jpg');
 }
 
 #root {
+    position: relative;
+    opacity: 0.9;
+    background: #ffffff;
+    border-top: 1px solid #ffffff;
+    border-bottom: 1px solid #ffffff;
+    min-height: calc(100vh - 2px);
+    min-width: 320px;
+}
+
+.todo {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.todo__tasks-add {
+    /* width: 50%; */
+    margin-left: 5%;
+}
+
+.todo__table {
+    margin: 10px 0 20px 0;
+    border: 1px solid rgba(221, 221, 221, 1);
+    border-collapse: separate;
+    border-spacing: 0;
+    box-shadow: 0 0 10px 5px rgba(221, 221, 221, 1);
+}
+
+.todo__table__data {
+    border: 0.5px solid rgba(221, 221, 221, 1);
+    padding: 10px;
+    text-align: center;
+    width: 40px;
+    height: 30px;
+}
+
+tr:first-child .todo__table__data_cells {
+    cursor: default;
+    color: blue;
+    border: 0.5px solid paleturquoise;
+    border-bottom: 3px double paleturquoise;
+}
+
+tr:nth-child(2) .todo__table__data_cells {
+    border-top: none;
+}
+
+tr:first-child .todo__table__data_cells:last-child,
+tr:first-child .todo__table__data_cells:nth-last-child(2) {
+    color: red;
+}
+
+.todo__table__data_header {
+    background: paleturquoise;
+}
+
+.todo__table__data_cells {
+    cursor: pointer;
+}
+
+.todo__table__data_choisen {
+    background: bisque;
+}
+
+.todo__table__data_tasks {
+    background: LightCyan;
+}
+
+table {
+    border-radius: 10px !important;
+}
+
+/* top-left border-radius */
+table tr:first-child th:first-child {
+    border-top-left-radius: 10px !important;
+}
+
+/* top-right border-radius */
+table tr:first-child th:last-child {
+    border-top-right-radius: 10px !important;
+}
+
+/* bottom-left border-radius */
+table tr:last-child td:first-child {
+    border-bottom-left-radius: 10px !important;
+}
+
+/* bottom-right border-radius */
+table tr:last-child td:last-child {
+    border-bottom-right-radius: 10px !important;
+}
+
+.todo__header1 {
+    width: 90%;
+    margin: 10px auto;
+    box-shadow: 0 6px 4px -4px rgba(221, 221, 221, 1);
+}
+
+.todo__header2 {
+    margin: 10px auto;
+}
+
+.todo__header1,
+.todo__header2,
+.todo__header3 {
+    text-align: center;
+}
+
+
+
+.tasks {
+    width: 65%;
+}
+
+/* #root {
     width: 90%;
     margin: 0 auto;
-}
+    display: flex;
+    flex-wrap: wrap;
+} */
 
 #modal {
     display: none;
@@ -28,4 +136,269 @@ code {
 
 #modal.modal-vision {
     display: block;
+}
+
+
+
+.weather {
+    width: 30%;
+    margin-right: 5%;
+}
+
+.weather__header {
+    margin: 10px auto;
+    text-align: center;
+}
+
+.weather__content {
+    box-shadow: 0 0 10px 5px rgba(221, 221, 221, 1);
+    /* height: calc(100% - 72px); */
+    border-radius: 10px;
+    text-align: center;
+    padding: 15px 10px;
+    margin-top: 10px;
+}
+
+.weather__paragraph {
+    font-size: 20px;
+}
+
+.weather__paragraph:first-child {
+    margin: 0;
+}
+
+.weather__paragraph:last-child {
+    margin-bottom: 0;
+}
+
+.weather__icon {
+    position: relative;
+    top: 10px;
+}
+
+
+.todo__table {
+    margin: 10px 0 20px 0;
+    border: 1px solid rgba(221, 221, 221, 1);
+    border-collapse: separate;
+    border-spacing: 0;
+    box-shadow: 0 0 10px 5px rgba(221, 221, 221, 1);
+}
+
+.todo__table__data {
+    border: 0.5px solid rgba(221, 221, 221, 1);
+    padding: 10px;
+    text-align: center;
+    width: 40px;
+    height: 30px;
+}
+
+tr:first-child .todo__table__data_cells {
+    cursor: default;
+    color: blue;
+    border: 0.5px solid paleturquoise;
+    border-bottom: 3px double paleturquoise;
+}
+
+tr:nth-child(2) .todo__table__data_cells {
+    border-top: none;
+}
+
+tr:first-child .todo__table__data_cells:last-child,
+tr:first-child .todo__table__data_cells:nth-last-child(2) {
+    color: red;
+}
+
+.todo__table__data_header {
+    background: paleturquoise;
+}
+
+.todo__table__data_cells {
+    cursor: pointer;
+}
+
+.todo__table__data_choisen {
+    background: bisque;
+}
+
+.todo__table__data_tasks {
+    background: LightCyan;
+}
+
+table {
+    border-radius: 10px !important;
+}
+
+/* top-left border-radius */
+table tr:first-child th:first-child {
+    border-top-left-radius: 10px !important;
+}
+
+/* top-right border-radius */
+table tr:first-child th:last-child {
+    border-top-right-radius: 10px !important;
+}
+
+/* bottom-left border-radius */
+table tr:last-child td:first-child {
+    border-bottom-left-radius: 10px !important;
+}
+
+/* bottom-right border-radius */
+table tr:last-child td:last-child {
+    border-bottom-right-radius: 10px !important;
+}
+
+.todo__header1 {
+    width: 90%;
+    margin: 10px auto;
+    box-shadow: 0 6px 4px -4px rgba(221, 221, 221, 1);
+}
+
+.todo__header2 {
+    margin: 10px auto;
+}
+
+.todo__header1,
+.todo__header2,
+.todo__header3 {
+    text-align: center;
+}
+
+
+
+/* modal window */
+
+.modal {
+    border: 1px solid #000000;
+    padding: 10px;
+    position: fixed;
+    width: 50%;
+    height: 50%;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    background: #ffffff;
+    z-index: 1;
+    display: none;
+}
+
+.modal_visible {
+    display: block;
+}
+
+.modal__cover {
+    width: 100%;
+    min-height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.5);
+    opacity: 1;
+    /* pointer-events: none; */
+    max-height: 100vh;
+    z-index: 2;
+    display: none;
+}
+
+.modal__cover_visible {
+    display: block;
+}
+
+.modal__header {
+    text-align: center;
+}
+
+.modal__paragraph {
+    text-align: justify;
+}
+
+.modal__button_exit {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+}
+
+.modal__textarea {
+    width: calc(100% - 6px);
+    min-width: calc(100% - 6px);
+    height: calc(50% - 6px);
+    min-height: calc(50% - 6px);
+}
+
+.modal__button_enter {
+    width: 100%;
+    text-align: center;
+}
+
+
+
+
+.todo__tasks {
+    width: 90%;
+    margin: 20px auto;
+    margin-top: 0;
+    border: 1px solid rgba(221, 221, 221, 1);
+    border-radius: 10px;
+    box-shadow: 0 0 10px 5px rgba(221, 221, 221, 1);
+
+    /* box-shadow:
+   0 1px 4px rgba(0, 0, 0, .3),
+   -23px 0 20px -23px rgba(0, 0, 0, .8),
+   23px 0 20px -23px rgba(0, 0, 0, .8),
+   0 0 40px rgba(0, 0, 0, .1) inset; */
+}
+
+.modal-button {
+    text-align: center;
+    margin: 20px;
+}
+
+.modal-button__button {
+    margin: 0 auto;
+}
+
+
+
+
+
+/* .todo__tasks__list {
+
+} */
+
+.todo__tasks__item {
+    /* border: 1px dotted #000000; */
+    width: calc(100% - 50px);
+    margin: 10px 20px;
+    padding: 5px;
+    cursor: grab;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .2);
+}
+
+.todo__tasks__item:active{
+    cursor: grabbing;
+}
+
+
+
+.todo__tasks__button {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    border-radius: 10px;
+    float: right;
+    margin: 0 10px;
+    top: 1px;
+}
+
+.todo__tasks__button:hover {
+    background: white;
+}
+
+.todo__tasks__button svg {
+    position: absolute;
+    left: 3px;
+    top: 3px;
 }

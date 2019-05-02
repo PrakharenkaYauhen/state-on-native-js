@@ -12,187 +12,107 @@
 
     <div id="root">
 
-        <div class='add-task'>
-            <label for="new-task"></label>
-            <input type="text" name="" id="new-task">
-            <button id="add-new-task">new task</button>
+        <h1 class='todo__header1'>To-do list</h1>
+        <div class='todo'>
+
+            <div class='todo__tasks-add'>
+                <h2 class='todo__header2'>Calendar</h2>
+                <table class='todo__table' id='todo__table'>
+                    <thead>
+                        <tr>
+                            <th class='todo__table__data todo__table__data_header'>
+                                left </th>
+                            <th class='todo__table__data todo__table__data_header'>
+                                l </th>
+                            <th class='todo__table__data todo__table__data_header' colSpan='3'
+                                id='table-header-year-month'></th>
+                            <th class='todo__table__data todo__table__data_header'>
+                                r </th>
+                            <th class='todo__table__data todo__table__data_header'>
+                                right</th>
+                        </tr>
+                    </thead>
+                    <tbody id='table-body'></tbody>
+                </table>
+            </div>
+
+            <div class='weather'>
+                <h2 class='weather__header'>Weather</h2>
+                <div class='weather__content'>
+                    <p class='weather__paragraph'>Temperature in {todayWeather.name} now: {todayWeather.main.temp}°C</p>
+                    <img class='weather__icon' src={"https://openweathermap.org/img/w/" + todayWeather.weather['0'].icon
+                        + ".png" } alt="icon of weather" />
+                    <p class='weather__paragraph'>"{todayWeather.weather['0'].description}"</p>
+                    <p class='weather__paragraph'>Wind: {todayWeather.wind.speed}м/c»</p>
+                    <p class='weather__paragraph'>Humidity: {todayWeather.main.humidity}%»</p>
+                </div>
+            </div>
+
+            <div class='todo__tasks'>
+                <div class='modal-button'>
+                    <button class='modal-button__button'>add a new task</button>
+                </div>
+            </div>
+
+            <div class='todo__tasks'>
+                <h2 class='todo__header2'>Today's tasks</h2>
+                <ol class='todo__tasks__list'>
+                    <li class='todo__tasks__item'>
+                        <span>{props.task}</span>
+                        <button class='todo__tasks__button'></button>
+                    </li>
+                </ol>
+                
+                <h2 class='todo__header2'>Today's done's tasks</h2>
+                <ul class='todo__tasks__list'>
+                    <li class='todo__tasks__item'>
+                        <span>{props.task}</span>
+                        <button class='todo__tasks__button'></button>
+                    </li>
+                </ul>
+            </div>
+
         </div>
 
-        <div class='task'>
-            <ol class='task-list' id="task-list">
-
-            </ol>
+        <div class='modal__cover'>
+            <div class='modal'>
+                <h2 class='modal__header'>Please, add a new task</h2>
+                <label class='modal__textarea_label'>Your new task:
+                    <textarea class='modal__textarea'></textarea>
+                </label>
+                <button class='modal__button_enter'>add a new task</button>
+                <button class='modal__button_exit'>x</button>
+            </div>
         </div>
 
-        <div id='modal'></div>
+
+
+
+        <!-- <div class="tasks">
+            <h1>State (todo-list)</h1>
+
+            <div class='add-task'>
+                <label for="new-task"></label>
+                <input type="text" name="" id="new-task" class="new-task">
+                <button id="add-new-task" class="add-new-task">new task</button>
+            </div>
+
+            <div class='task'>
+                <ol class='task-list' id="task-list">
+
+                </ol>
+            </div>
+
+            <div id='modal'>
+                <label for="new-task"></label>
+                <input type="text" name="" id="new-task" class="new-task">
+                <button id="add-new-task" class="add-new-task">new task</button>
+            </div>
+
+        </div> -->
 
     </div>
 
-    <script>
-        const root = document.getElementById('root');
-        const taskList = document.getElementById('task-list');
-        const addTaskInput = document.getElementById('new-task');
-        const addTaskButton = document.getElementById('add-new-task');
-        let modalTaskButton = document.getElementById('modal-task');
-        const modal = document.getElementById('modal');
-        let modalActive = false;
-
-        const createStore = (reducer, initialState) => {
-            const store = {};
-            store.state = initialState;
-            store.listeners = [];
-            store.getState = () => store.state;
-            store.subscribe = listener => {
-                store.listeners.push(listener);
-            };
-            store.dispatch = action => {
-                console.log('> Action', action);
-                console.log(store.state, action);
-                store.state = reducer(store.state, action);
-                store.listeners.forEach(listener => listener());
-            };
-            return store;
-        };
-
-        const getInitialState = () => {
-            return {
-                task: [`The prime task`],
-                modalActive: false,
-            };
-        };
-
-        const reducer = (state = getInitialState(), action) => {
-            switch (action.type) {
-
-                case 'ADD-TASK-IN-THE-LIST':
-                    let newTasksArr = state.task.slice();
-                    newTasksArr.push(action.payload.task);
-                    nextState = {
-                        task: newTasksArr,
-                    }
-                    addTaskInput.value = '';
-                    addTaskInput.focus();
-                    return nextState;
-
-                case 'DELETE-TASK-IN-THE-LIST':
-                    let delTasksArr = state.task;
-                    let indexDelElement = delTasksArr.indexOf(action.payload.task.split('<span')[0]);
-                    if (indexDelElement !== -1) {
-                        delTasksArr.splice(indexDelElement, 1);
-                        nextState = {
-                            task: delTasksArr,
-                        }
-                    }
-                    return nextState;
-
-                case 'MODAL-TASK-IN-THE-LIST':
-                console.log(state.modalActive)
-                    nextState = {
-                        modalActive: action.payload.modalActive,
-                    }
-                    return nextState;
-
-                default:
-                    return state;
-            }
-        };
-
-        const store = createStore(reducer);
-
-        store.subscribe(() => {
-            const state = store.getState();
-            const task = state.task;
-            const modalStatus = state.modalActive;
-            console.log(state);
-            console.log(task);
-
-            if (task == undefined || task.length == 0) {
-                // taskList.innerHTML = 'There is no any task yet';
-                taskList.innerHTML = '';
-                let button = document.createElement('button');
-                button.classList.add('modal-task');
-                button.setAttribute('id', 'modal-task');
-                button.innerHTML = 'add a new task';
-                taskList.appendChild(button);
-                modalTaskButton = document.getElementById('modal-task');
-                console.log(modalTaskButton);
-            } else {
-                taskList.innerHTML = '';
-                for (let i = 0; i < task.length; i++) {
-                    let li = document.createElement('li');
-                    let span = document.createElement('span');
-                    li.innerHTML = task[i];
-                    span.innerHTML = ' X';
-                    span.classList.add('delete-task')
-                    li.appendChild(span);
-                    taskList.appendChild(li);
-                    span.addEventListener('click', deleteTask);
-                }
-            }
-
-            console.log(modalStatus);
-            if (modalStatus) {
-                modal.classList.add('modal-vision')
-            } else {
-                modal.classList.remove('modal-vision')
-            }
-        });
-
-        store.dispatch({}); // Sets the inital state
-
-
-
-        addTaskButton.addEventListener('click', () => {
-
-            if (addTaskInput.value.length !== 0) {
-                // console.log('----- Previous state', store.getState());
-                store.dispatch({
-                    type: 'ADD-TASK-IN-THE-LIST',
-                    payload: {
-                        task: addTaskInput.value,
-                    },
-                })
-            } else {
-                return
-            }
-            // console.log('+++++ New state', store.getState());
-
-        });
-
-
-        let deleteTaskButton = document.getElementsByClassName('delete-task');
-
-        for (let i = 0; i < deleteTaskButton.length; i++) {
-            deleteTaskButton[i].addEventListener('click', deleteTask);
-        }
-
-        function deleteTask(e) {
-            // console.log('----- Previous state', store.getState());
-            store.dispatch({
-                type: 'DELETE-TASK-IN-THE-LIST',
-                payload: {
-                    task: e.target.parentNode.innerHTML,
-                },
-            })
-            // console.log('+++++ New state', store.getState());
-        }
-
-        document.addEventListener('click', e => {
-            var target = e.target;
-            if (target.classList.contains('modal-task')) {
-                console.log(modalActive);
-                modalActive = !modalActive ? true : false;
-                console.log(modalActive);
-                store.dispatch({
-                    type: 'MODAL-TASK-IN-THE-LIST',
-                    payload: {
-                        modalActive: modalActive,
-                    },
-                })
-            }
-        });
-        
-    </script>
 </body>
 
 </html>

@@ -1,17 +1,5 @@
-// import React from 'react';
-// import './App.css';
+import {createStore} from './state/createStore.js';
+import {getInitialState} from './state/getInitialState.js';
+import {reducer} from './reducers/reducer.js';
 
-// function App() {
-//     return (
-//         <div className="App">
-//             <h1>State</h1>
-//         </div>
-//     );
-// }
-
-// export default App;
-
-const header = document.createElement('h1');
-header.innerHTML = 'Hello state';
-
-export {header};
+export {createStore, getInitialState, reducer};
