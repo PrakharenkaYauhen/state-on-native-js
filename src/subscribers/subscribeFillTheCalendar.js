@@ -2,11 +2,16 @@
 
 import { store } from './../index.js';
 // import { fillipDeleteTask } from './../fillips/fillipDeleteTask.js';
+import { fillipGetWeather } from './../fillips/fillipGetWeather.js';
+// import imgUrl from './../Sun.png';
+
+let previousDate = null;
 
 let subscribeFillTheCalendar = () => {
     const state = store.getState();
     const currentDate = state.currentDate;
     const currentDayInTheCalendar = state.currentDayInTheCalendar;
+    
     const currentYear = currentDate.getFullYear();
     const currentMonth = currentDate.getMonth();
     const firstDayOfTheMonth = new Date(currentYear, currentMonth, 1).getDay();
@@ -15,7 +20,10 @@ let subscribeFillTheCalendar = () => {
     const monthes = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     let tableBody = document.getElementById('table-body');
 
-    // console.log(tableBody.innerHTML);
+    if (currentDayInTheCalendar !== previousDate) {
+        fillipGetWeather();
+        previousDate = currentDayInTheCalendar;
+    } 
 
     if (!tableBody.innerHTML) {
 
@@ -68,14 +76,15 @@ let subscribeFillTheCalendar = () => {
             tableRows[6 + i].innerHTML = i + 1;
         }
 
-
         for (let i = 0; i < tableRows.length; i++) {
             if (+tableRows[i].innerHTML === currentDayInTheCalendar) {
                 tableRows[i].classList.add('todo__table__data_choisen');
             } else {
                 tableRows[i].classList.remove('todo__table__data_choisen');
             }
-        }
+        }        
+
+        
 
 
         //         cells[firstDayOfTheMonth - 1 + currentDayInTheCalendar - 1] = <TableCellsVisionCurrentDate
@@ -96,6 +105,25 @@ let subscribeFillTheCalendar = () => {
         //     onDoubleClick={props.onDoubleClickOpenModal}>
         //     {props.currentDayInTheCalendar}
         // </td>
+    }
+
+    const weatherObject = state.weatherObject;
+
+    for (let i = 0; i < tableRows.length; i++) {
+        if (+tableRows[i].innerHTML === new Date().getDate()) {
+            if (weatherObject) {
+                let img = document.createElement('img');
+                img.setAttribute('src', "https://openweathermap.org/img/w/" + weatherObject[0].weather['0'].icon + ".png");
+                img.classList.add('todo__table__sun');
+                tableRows[i].appendChild(img);
+                for (let j = 1; j <= 4; j++) {
+                    let img = document.createElement('img');
+                    img.setAttribute('src', "https://openweathermap.org/img/w/" + weatherObject[1].list[j * 8 +1 + ''].weather['0'].icon + ".png");
+                    img.classList.add('todo__table__sun');
+                    tableRows[i+j].appendChild(img);
+                }
+            } 
+        }
     }
 
     //     if (firstDayOfTheMonth !== 0) {

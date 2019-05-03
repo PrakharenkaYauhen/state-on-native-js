@@ -3,8 +3,8 @@
 function getWeather(nextState, state, action) {
 
     return nextState = {
-        task: state.tasksList,
-        // modalActive: state.modalActive,
+        task: state.task,
+        modalActive: state.modalActive,
         currentDate: state.currentDate,
         currentDayInTheCalendar: state.currentDayInTheCalendar,
         currentLocalStorageKey: state.currentLocalStorageKey,

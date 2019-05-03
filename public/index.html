@@ -38,14 +38,7 @@
 
             <div class='weather'>
                 <h2 class='weather__header'>Weather</h2>
-                <div class='weather__content'>
-                    <p class='weather__paragraph'>Temperature in {todayWeather.name} now: {todayWeather.main.temp}°C</p>
-                    <img class='weather__icon' src={"https://openweathermap.org/img/w/" + todayWeather.weather['0'].icon
-                        + ".png" } alt="icon of weather" />
-                    <p class='weather__paragraph'>"{todayWeather.weather['0'].description}"</p>
-                    <p class='weather__paragraph'>Wind: {todayWeather.wind.speed}м/c»</p>
-                    <p class='weather__paragraph'>Humidity: {todayWeather.main.humidity}%»</p>
-                </div>
+                <div class='weather__content'></div>
             </div>
 
             <div class='todo__tasks'>
@@ -84,32 +77,6 @@
                 <button class='modal__button_exit'>x</button>
             </div>
         </div>
-
-
-
-
-        <!-- <div class="tasks">
-            <h1>State (todo-list)</h1>
-
-            <div class='add-task'>
-                <label for="new-task"></label>
-                <input type="text" name="" id="new-task" class="new-task">
-                <button id="add-new-task" class="add-new-task">new task</button>
-            </div>
-
-            <div class='task'>
-                <ol class='task-list' id="task-list">
-
-                </ol>
-            </div>
-
-            <div id='modal'>
-                <label for="new-task"></label>
-                <input type="text" name="" id="new-task" class="new-task">
-                <button id="add-new-task" class="add-new-task">new task</button>
-            </div>
-
-        </div> -->
 
     </div>
 

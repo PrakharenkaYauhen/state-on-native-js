@@ -215,6 +215,14 @@ tr:first-child .todo__table__data_cells:nth-last-child(2) {
 
 .todo__table__data_cells {
     cursor: pointer;
+    position: relative;
+}
+
+.todo__table__sun {
+    position: absolute;
+    width: 20px;
+    right: 0;
+    top: 0;
 }
 
 .todo__table__data_choisen {
@@ -401,4 +409,11 @@ table tr:last-child td:last-child {
     position: absolute;
     left: 3px;
     top: 3px;
+}
+
+
+
+.preloader {
+    width: 25%;
+    margin: 50px auto;
 }

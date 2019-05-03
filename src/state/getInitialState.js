@@ -12,7 +12,6 @@ const getInitialState = () => {
 
     return {
         task: JSON.parse(localStorage.getItem(currentLocalStorageKey)),
-        // modalActive: false,
         currentDate: currentDate,
         currentDayInTheCalendar: currentDayInTheCalendar,
         currentLocalStorageKey: currentLocalStorageKey,

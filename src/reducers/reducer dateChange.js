@@ -14,10 +14,11 @@ function dateChange(nextState, state, action) {
     console.log(action);
     nextState = {
         task: todaysTasks,
-        // modalActive: state.modalActive,
         currentDate: action.payload.currentDate,
         currentDayInTheCalendar: action.payload.currentDayInTheCalendar,
         currentLocalStorageKey: currentLocalStorageKey,
+        loadComplete: false,
+        weatherObject: state.weatherObject,
     }
     return nextState;
 }

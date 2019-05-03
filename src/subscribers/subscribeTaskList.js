@@ -1,15 +1,18 @@
 // subscribeTaskList of the App
 
 import { theList, store } from './../index.js';
-import { fillipDeleteTask } from './../fillips/fillipDeleteTask.js';
+// import { fillipDeleteTask } from './../fillips/fillipDeleteTask.js';
+// import { fillipGetWeather } from './../fillips/fillipGetWeather.js';
 
 let subscribeTaskList = () => {
     const state = store.getState();
     const task = state.task;
 
-    // console.log(state);
+    console.log(state);
 
     theList[0].innerHTML = '';
+
+    // fillipGetWeather();
 
     if (!task) return theList[0].innerHTML = "You don't have any task now";
     

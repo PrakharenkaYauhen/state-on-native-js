@@ -16,10 +16,11 @@ function addTaskInTheList(nextState, state, action) {
 
     return nextState = {
         task: tasksList,
-        // modalActive: state.modalActive,
         currentDate: state.currentDate,
         currentDayInTheCalendar: state.currentDayInTheCalendar,
-        currentLocalStorageKey: state.currentLocalStorageKey,
+        currentLocalStorageKey: state.currentLocalStorageKey,        
+        loadComplete: true,
+        weatherObject: state.weatherObject,
     }
 }
 

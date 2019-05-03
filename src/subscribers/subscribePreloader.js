@@ -11,7 +11,12 @@ let subscribePreloader = () => {
 
     weather.innerHTML = '';
     let img = document.createElement('img');
+    let p = document.createElement('p');
+    img.classList.add('preloader');    
     img.setAttribute('src', imgUrl);
+    p.classList.add('weather__paragraph');
+    p.innerHTML = 'We are looking for an information';
+    weather.appendChild(p);
     weather.appendChild(img);
 }
 

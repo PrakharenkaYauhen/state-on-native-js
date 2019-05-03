@@ -5,13 +5,18 @@ import { store } from './../index.js';
 let fillipDateChange = e => {
     var target = e.target;
 
-    if (target.tagName !== 'TD') return; 
+    const state = store.getState();
+    const currentDayInTheCalendar = state.currentDayInTheCalendar;
+
+    console.log(currentDayInTheCalendar);
+
+    if (target.tagName !== 'TD' || parseFloat(target.innerHTML) === currentDayInTheCalendar) return; 
 
     store.dispatch({
         type: 'DATE-CHANGE-CALENDAR',
         payload: {
             currentDate: new Date(),
-            currentDayInTheCalendar: +target.innerHTML
+            currentDayInTheCalendar: parseFloat(target.innerHTML)
         },
     })
 }
