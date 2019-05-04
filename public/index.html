@@ -49,7 +49,7 @@
 
             <div class='todo__tasks'>
                 <h2 class='todo__header2'>Today's tasks</h2>
-                <ol class='todo__tasks__list'>
+                <ol class='todo__tasks__list' id="todo__tasks__left">
                     <li class='todo__tasks__item'>
                         <span>{props.task}</span>
                         <button class='todo__tasks__button'></button>
@@ -57,10 +57,12 @@
                 </ol>
                 
                 <h2 class='todo__header2'>Today's done's tasks</h2>
-                <ul class='todo__tasks__list'>
+                <ul class='todo__tasks__list' id="todo__tasks__done">
                     <li class='todo__tasks__item'>
                         <span>{props.task}</span>
-                        <button class='todo__tasks__button'></button>
+                        <button class='todo__tasks__button todo__tasks__button_delete'></button>
+                        <button class='todo__tasks__button todo__tasks__button_done'></button>
+                        <button class='todo__tasks__button todo__tasks__button_correct'></button>                        
                     </li>
                 </ul>
             </div>

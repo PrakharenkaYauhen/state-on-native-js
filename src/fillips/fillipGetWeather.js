@@ -19,7 +19,8 @@ let fillipGetWeather = () => {
         let city = (coords) ? 'lat=' + coords.latitude.toFixed(6) + '&lon=' + coords.longitude.toFixed(6) : 'q=Minsk';
         return Promise.all([
             fetch('http://api.openweathermap.org/data/2.5/weather?' + city + '&units=metric&lang=en&APPID=2d009bc907c3f547b59f7129beb7c9ee'),
-            fetch('http://api.openweathermap.org/data/2.5/forecast?' + city + '&units=metric&lang=en&APPID=2d009bc907c3f547b59f7129beb7c9ee')
+            fetch('http://api.openweathermap.org/data/2.5/forecast?' + city + '&units=metric&lang=en&APPID=2d009bc907c3f547b59f7129beb7c9ee'),
+            // fetch('https://date.nager.at/Api/v1/Get/BY/2019')
         ])
     })
         .then(res => {
@@ -31,7 +32,7 @@ let fillipGetWeather = () => {
             Promise.all(res)
                 .then(
                     (result) => {
-                        console.log(result);
+                        // console.log(result);
                         store.dispatch({
                             type: 'GET-WEATHER',
                             payload: {

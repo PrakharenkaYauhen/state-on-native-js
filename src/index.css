@@ -225,6 +225,13 @@ tr:first-child .todo__table__data_cells:nth-last-child(2) {
     top: 0;
 }
 
+.todo__table__pin {
+    position: absolute;
+    width: 15px;
+    left: 0;
+    top: 0;
+}
+
 .todo__table__data_choisen {
     background: bisque;
 }
@@ -399,10 +406,32 @@ table tr:last-child td:last-child {
     float: right;
     margin: 0 10px;
     top: 1px;
+    outline: none;
+    opacity: .8;
+}
+
+.todo__tasks__button_correct {
+    background: yellow;
+}
+
+.todo__tasks__button_done {
+    background: green;
+}
+
+.todo__tasks__button_delete {
+    background: red;
 }
 
 .todo__tasks__button:hover {
-    background: white;
+    box-shadow: grey;
+    opacity: 1;
+    outline: none;
+}
+
+.todo__tasks__button:active {
+    box-shadow: 0 3px 3px #575555 inset; 
+    opacity: 1;
+    outline: none;
 }
 
 .todo__tasks__button svg {

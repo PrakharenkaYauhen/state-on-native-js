@@ -2,39 +2,46 @@
 
 import { theList, store } from './../index.js';
 // import { fillipDeleteTask } from './../fillips/fillipDeleteTask.js';
-// import { fillipGetWeather } from './../fillips/fillipGetWeather.js';
+
+let previousTasksString;
 
 let subscribeTaskList = () => {
     const state = store.getState();
     const task = state.task;
+    let currentTuskString = JSON.stringify(task);
+
+    if (previousTasksString !== currentTuskString) {
+        previousTasksString = currentTuskString;
+    } else {
+        return
+    }
 
     console.log(state);
 
     theList[0].innerHTML = '';
 
-    // fillipGetWeather();
-
-    if (!task) return theList[0].innerHTML = "You don't have any task now";
+    if (!task || task.length === 0) return theList[0].innerHTML = "You don't have any task now";
     
     for (let i = 0; i < task.length; i++) {
         let li = document.createElement('li');
         li.classList.add('todo__tasks__item');
         let span = document.createElement('span');
         span.innerHTML = task[i].content;
-        li.appendChild(span);
-        let button = document.createElement('button');
-        button.classList.add('todo__tasks__button');
-        li.appendChild(button);
+        li.appendChild(span);        
+        let buttonDelete = document.createElement('button');
+        buttonDelete.classList.add('todo__tasks__button');
+        buttonDelete.classList.add('todo__tasks__button_delete');
+        li.appendChild(buttonDelete);
+        let buttonDone = document.createElement('button');
+        buttonDone.classList.add('todo__tasks__button');
+        buttonDone.classList.add('todo__tasks__button_done');
+        li.appendChild(buttonDone);
+        let buttonCorrect = document.createElement('button');
+        buttonCorrect.classList.add('todo__tasks__button');
+        buttonCorrect.classList.add('todo__tasks__button_correct');
+        li.appendChild(buttonCorrect);
         theList[0].appendChild(li);
     }
-
-//     <li class='todo__tasks__item'>
-//     <span>{props.task}</span>
-//     <button class='todo__tasks__button'></button>
-//     <button class='todo__tasks__button'></button>
-//     <button class='todo__tasks__button'></button>
-// </li>
-
 
     // if (task === undefined || task.length === 0) {
     //     taskList.innerHTML = '';

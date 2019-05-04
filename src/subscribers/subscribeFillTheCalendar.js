@@ -4,6 +4,7 @@ import { store } from './../index.js';
 // import { fillipDeleteTask } from './../fillips/fillipDeleteTask.js';
 import { fillipGetWeather } from './../fillips/fillipGetWeather.js';
 // import imgUrl from './../Sun.png';
+import imgPinBoardURL from './../pin-board.png';
 
 let previousDate = null;
 
@@ -11,7 +12,7 @@ let subscribeFillTheCalendar = () => {
     const state = store.getState();
     const currentDate = state.currentDate;
     const currentDayInTheCalendar = state.currentDayInTheCalendar;
-    
+
     const currentYear = currentDate.getFullYear();
     const currentMonth = currentDate.getMonth();
     const firstDayOfTheMonth = new Date(currentYear, currentMonth, 1).getDay();
@@ -23,7 +24,7 @@ let subscribeFillTheCalendar = () => {
     if (currentDayInTheCalendar !== previousDate) {
         fillipGetWeather();
         previousDate = currentDayInTheCalendar;
-    } 
+    }
 
     if (!tableBody.innerHTML) {
 
@@ -77,52 +78,44 @@ let subscribeFillTheCalendar = () => {
         }
 
         for (let i = 0; i < tableRows.length; i++) {
-            if (+tableRows[i].innerHTML === currentDayInTheCalendar) {
+            if (parseFloat(tableRows[i].innerHTML) === currentDayInTheCalendar) {
                 tableRows[i].classList.add('todo__table__data_choisen');
             } else {
                 tableRows[i].classList.remove('todo__table__data_choisen');
             }
-        }        
 
-        
-
-
-        //         cells[firstDayOfTheMonth - 1 + currentDayInTheCalendar - 1] = <TableCellsVisionCurrentDate
-        //             currentDayInTheCalendar={currentDayInTheCalendar}
-        //             onClick={props.onClickCell}
-        //             onDoubleClickOpenModal={props.modalCalendarOpenCloseClick}
-        //             key={firstDayOfTheMonth - 1 + currentDayInTheCalendar - 1} />;
-        //     } else {
-        //         cells[6 + firstDayOfTheMonth + currentDayInTheCalendar - 1] = <TableCellsVisionCurrentDate
-        //             currentDayInTheCalendar={currentDayInTheCalendar}
-        //             onClick={props.onClickCell}
-        //             onDoubleClickOpenModal={props.modalCalendarOpenCloseClick}
-        //             key={6 + firstDayOfTheMonth + currentDayInTheCalendar - 1} />;
-        //     }
-
-        //     <td className='todo__table__data todo__table__data_cells todo__table__data_choisen'
-        //     onClick={props.onClick}
-        //     onDoubleClick={props.onDoubleClickOpenModal}>
-        //     {props.currentDayInTheCalendar}
-        // </td>
+            let localStorageKeysArray = Object.keys(localStorage);
+            for (let j = 0; j < localStorageKeysArray.length; j++) {
+                if (localStorageKeysArray[j].split(' ').slice(-1)[0] === tableRows[i].innerHTML) {
+                    let imgPinBoard = document.createElement('img');
+                    imgPinBoard.setAttribute('src', imgPinBoardURL);
+                    imgPinBoard.classList.add('todo__table__pin');
+                    tableRows[i].appendChild(imgPinBoard);
+                }
+            }
+        }
     }
+
+    // console.log(Object.keys(localStorage));
 
     const weatherObject = state.weatherObject;
 
     for (let i = 0; i < tableRows.length; i++) {
-        if (+tableRows[i].innerHTML === new Date().getDate()) {
+        if (parseFloat(tableRows[i].innerHTML) === new Date().getDate()) {
             if (weatherObject) {
+                
                 let img = document.createElement('img');
                 img.setAttribute('src', "https://openweathermap.org/img/w/" + weatherObject[0].weather['0'].icon + ".png");
                 img.classList.add('todo__table__sun');
+                // console.log(img);
                 tableRows[i].appendChild(img);
                 for (let j = 1; j <= 4; j++) {
                     let img = document.createElement('img');
-                    img.setAttribute('src', "https://openweathermap.org/img/w/" + weatherObject[1].list[j * 8 +1 + ''].weather['0'].icon + ".png");
+                    img.setAttribute('src', "https://openweathermap.org/img/w/" + weatherObject[1].list[j * 8 + 1 + ''].weather['0'].icon + ".png");
                     img.classList.add('todo__table__sun');
-                    tableRows[i+j].appendChild(img);
+                    tableRows[i + j].appendChild(img);
                 }
-            } 
+            }
         }
     }
 
