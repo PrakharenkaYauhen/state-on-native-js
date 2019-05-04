@@ -63,6 +63,21 @@ tr:first-child .todo__table__data_cells:nth-last-child(2) {
 
 .todo__table__data_cells {
     cursor: pointer;
+    position: relative;
+}
+
+.todo__table__sun {
+    position: absolute;
+    width: 20px;
+    right: 0;
+    top: 0;
+}
+
+.todo__table__pin {
+    position: absolute;
+    width: 15px;
+    left: 0;
+    top: 0;
 }
 
 .todo__table__data_choisen {
@@ -175,111 +190,6 @@ table tr:last-child td:last-child {
     position: relative;
     top: 10px;
 }
-
-
-.todo__table {
-    margin: 10px 0 20px 0;
-    border: 1px solid rgba(221, 221, 221, 1);
-    border-collapse: separate;
-    border-spacing: 0;
-    box-shadow: 0 0 10px 5px rgba(221, 221, 221, 1);
-}
-
-.todo__table__data {
-    border: 0.5px solid rgba(221, 221, 221, 1);
-    padding: 10px;
-    text-align: center;
-    width: 40px;
-    height: 30px;
-}
-
-tr:first-child .todo__table__data_cells {
-    cursor: default;
-    color: blue;
-    border: 0.5px solid paleturquoise;
-    border-bottom: 3px double paleturquoise;
-}
-
-tr:nth-child(2) .todo__table__data_cells {
-    border-top: none;
-}
-
-tr:first-child .todo__table__data_cells:last-child,
-tr:first-child .todo__table__data_cells:nth-last-child(2) {
-    color: red;
-}
-
-.todo__table__data_header {
-    background: paleturquoise;
-}
-
-.todo__table__data_cells {
-    cursor: pointer;
-    position: relative;
-}
-
-.todo__table__sun {
-    position: absolute;
-    width: 20px;
-    right: 0;
-    top: 0;
-}
-
-.todo__table__pin {
-    position: absolute;
-    width: 15px;
-    left: 0;
-    top: 0;
-}
-
-.todo__table__data_choisen {
-    background: bisque;
-}
-
-.todo__table__data_tasks {
-    background: LightCyan;
-}
-
-table {
-    border-radius: 10px !important;
-}
-
-/* top-left border-radius */
-table tr:first-child th:first-child {
-    border-top-left-radius: 10px !important;
-}
-
-/* top-right border-radius */
-table tr:first-child th:last-child {
-    border-top-right-radius: 10px !important;
-}
-
-/* bottom-left border-radius */
-table tr:last-child td:first-child {
-    border-bottom-left-radius: 10px !important;
-}
-
-/* bottom-right border-radius */
-table tr:last-child td:last-child {
-    border-bottom-right-radius: 10px !important;
-}
-
-.todo__header1 {
-    width: 90%;
-    margin: 10px auto;
-    box-shadow: 0 6px 4px -4px rgba(221, 221, 221, 1);
-}
-
-.todo__header2 {
-    margin: 10px auto;
-}
-
-.todo__header1,
-.todo__header2,
-.todo__header3 {
-    text-align: center;
-}
-
 
 
 /* modal window */
