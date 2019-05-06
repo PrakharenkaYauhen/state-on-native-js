@@ -1,18 +1,19 @@
 // subscribeFillTheCalendar
 
 import { store } from './../index.js';
-// import { fillipDeleteTask } from './../fillips/fillipDeleteTask.js';
 import { fillipGetWeather } from './../fillips/fillipGetWeather.js';
 import { fillipGetJuventus } from './../fillips/fillipGetJuventus.js';
-// import imgUrl from './../Sun.png';
-import imgPinBoardURL from './../pin-board.png';
+import imgPinBoardURL from './../pin-board150.png';
+import imgBallURL from './../ball150.png';
 
 let previousDate = null;
+let previousLocalStorage = null;
 
 let subscribeFillTheCalendar = () => {
     const state = store.getState();
     const currentDate = state.currentDate;
     const currentDayInTheCalendar = state.currentDayInTheCalendar;
+    const loadComplete = state.loadComplete;
 
     const currentYear = currentDate.getFullYear();
     const currentMonth = currentDate.getMonth();
@@ -57,19 +58,6 @@ let subscribeFillTheCalendar = () => {
 
     }
 
-
-
-    // let currentLocalStorageKey = currentYear + ' ' + currentMonth + ' ' + currentDayInTheCalendar;
-    // let datesWithTasks = [];
-
-    // for (let key in localStorage) {
-    //     if (localStorage.getItem(key)) {
-    //         if (currentLocalStorageKey.substr(0, 6) === key.substr(0, 6)) {
-    //             datesWithTasks.push(+key.split(' ')[2]);
-    //         }
-    //     }
-    // }
-
     const tableRows = document.querySelectorAll('.todo__table__data_cells');
 
     for (let i = 0; i < daysInThisMonth; i++) {
@@ -79,37 +67,77 @@ let subscribeFillTheCalendar = () => {
             tableRows[6 + i].innerHTML = i + 1;
         }
 
+        // for (let i = 0; i < tableRows.length; i++) {
+        //     if (parseFloat(tableRows[i].innerHTML) === currentDayInTheCalendar) {
+        //         tableRows[i].classList.add('todo__table__data_choisen');
+        //     } else {
+        //         tableRows[i].classList.remove('todo__table__data_choisen');
+        //     }
+
+        //     let localStorageKeysArray = Object.keys(localStorage);
+        //     for (let j = 0; j < localStorageKeysArray.length; j++) {
+        //         if (+localStorageKeysArray[j].split(' ')[2] === +tableRows[i].innerHTML && +localStorageKeysArray[j].split(' ')[1] === (currentMonth)) {
+        //             let imgPinBoard = document.createElement('img');
+        //             imgPinBoard.setAttribute('src', imgPinBoardURL);
+        //             imgPinBoard.classList.add('todo__table__pin');
+        //             tableRows[i].appendChild(imgPinBoard);
+        //             if (JSON.parse(localStorage.getItem(localStorageKeysArray[j]))[0].game) {
+        //                 let imgBall = document.createElement('img');
+        //                 imgBall.setAttribute('src', imgBallURL);
+        //                 imgBall.classList.add('todo__table__ball');
+        //                 tableRows[i].appendChild(imgBall);
+        //             }
+        //         }
+        //     }
+        // }
+    }
+
+    let localStorageKeysArray = Object.keys(localStorage);
+    let checkingLocalStorageKey;
+
+    let currentLocalStorage = JSON.stringify(localStorage);
+
+    // console.log(loadComplete);
+    if (previousLocalStorage !== currentLocalStorage && loadComplete) {
+        previousLocalStorage = currentLocalStorage;
+
         for (let i = 0; i < tableRows.length; i++) {
             if (parseFloat(tableRows[i].innerHTML) === currentDayInTheCalendar) {
                 tableRows[i].classList.add('todo__table__data_choisen');
             } else {
                 tableRows[i].classList.remove('todo__table__data_choisen');
             }
-
-            let localStorageKeysArray = Object.keys(localStorage);
+            
+            // console.log(localStorageKeysArray.length);
             for (let j = 0; j < localStorageKeysArray.length; j++) {
-                if (localStorageKeysArray[j].split(' ').slice(-1)[0] === tableRows[i].innerHTML) {
+                checkingLocalStorageKey = localStorageKeysArray[j].split(' ');
+                // console.log(checkingLocalStorageKey[0]);
+                if (+checkingLocalStorageKey[2] === +tableRows[i].innerHTML && +checkingLocalStorageKey[1] === currentMonth && +checkingLocalStorageKey[0] === currentYear) {
                     let imgPinBoard = document.createElement('img');
                     imgPinBoard.setAttribute('src', imgPinBoardURL);
                     imgPinBoard.classList.add('todo__table__pin');
                     tableRows[i].appendChild(imgPinBoard);
+                    if (JSON.parse(localStorage.getItem(localStorageKeysArray[j]))[0].game) {
+                        let imgBall = document.createElement('img');
+                        imgBall.setAttribute('src', imgBallURL);
+                        imgBall.classList.add('todo__table__ball');
+                        tableRows[i].appendChild(imgBall);
+                    }
                 }
             }
         }
     }
 
-    // console.log(Object.keys(localStorage));
-
     const weatherObject = state.weatherObject;
 
+    if (weatherObject) {
     for (let i = 0; i < tableRows.length; i++) {
         if (parseFloat(tableRows[i].innerHTML) === new Date().getDate()) {
-            if (weatherObject) {
+            // if (weatherObject) {
                 
                 let img = document.createElement('img');
                 img.setAttribute('src', "https://openweathermap.org/img/w/" + weatherObject[0].weather['0'].icon + ".png");
                 img.classList.add('todo__table__sun');
-                // console.log(img);
                 tableRows[i].appendChild(img);
                 for (let j = 1; j <= 4; j++) {
                     let img = document.createElement('img');
@@ -117,56 +145,10 @@ let subscribeFillTheCalendar = () => {
                     img.classList.add('todo__table__sun');
                     tableRows[i + j].appendChild(img);
                 }
+                break;
             }
         }
     }
-
-    //     if (firstDayOfTheMonth !== 0) {
-    //         if (datesWithTasks.some(number => number === (1 + i))) {
-
-    //             cells[firstDayOfTheMonth - 1 + i] = <TableCellsVisionDatesWithTasks
-    //                 onClick={props.onClickCell}
-    //                 content={i + 1}
-    //                 key={firstDayOfTheMonth - 1 + i} />;
-    //                 <td className='todo__table__data todo__table__data_cells todo__table__data_tasks'
-    //         onClick={props.onClick}>
-    //         {props.content}
-    //     </td>
-    //         } else {
-    //             cells[firstDayOfTheMonth - 1 + i] = <TableCellsVision
-    //                 onClick={props.onClickCell}
-    //                 content={i + 1}
-    //                 key={firstDayOfTheMonth - 1 + i} />;
-    //         }
-    //     } else {
-    //         if (datesWithTasks.some(number => number === (1 + i))) {
-    //             cells[6 + i] = <TableCellsVisionDatesWithTasks
-    //                 onClick={props.onClickCell}
-    //                 content={i + 1}
-    //                 key={6 + i} />;
-    //         } else {
-    //             cells[6 + i] = <TableCellsVision
-    //                 onClick={props.onClickCell}
-    //                 content={i + 1}
-    //                 key={6 + i} />;
-    //         }
-    //     }
-
-    //     if (firstDayOfTheMonth !== 0) {
-    //         cells[firstDayOfTheMonth - 1 + currentDayInTheCalendar - 1] = <TableCellsVisionCurrentDate
-    //             currentDayInTheCalendar={currentDayInTheCalendar}
-    //             onClick={props.onClickCell}
-    //             onDoubleClickOpenModal={props.modalCalendarOpenCloseClick}
-    //             key={firstDayOfTheMonth - 1 + currentDayInTheCalendar - 1} />;
-    //     } else {
-    //         cells[6 + firstDayOfTheMonth + currentDayInTheCalendar - 1] = <TableCellsVisionCurrentDate
-    //             currentDayInTheCalendar={currentDayInTheCalendar}
-    //             onClick={props.onClickCell}
-    //             onDoubleClickOpenModal={props.modalCalendarOpenCloseClick}
-    //             key={6 + firstDayOfTheMonth + currentDayInTheCalendar - 1} />;
-    //     }
-
-    // }
 }
 
 export {

@@ -1,7 +1,6 @@
 // subscribeTaskList of the App
 
 import { theList, store } from './../index.js';
-// import { fillipDeleteTask } from './../fillips/fillipDeleteTask.js';
 
 let previousTasksString;
 
@@ -42,29 +41,6 @@ let subscribeTaskList = () => {
         li.appendChild(buttonCorrect);
         theList[0].appendChild(li);
     }
-
-    // if (task === undefined || task.length === 0) {
-    //     taskList.innerHTML = '';
-    //     let button = document.createElement('button');
-    //     button.classList.add('modal-task');
-    //     button.setAttribute('id', 'modal-task');
-    //     button.innerHTML = 'add a new task';
-    //     taskList.appendChild(button);
-    //     // let modalTaskButton = document.getElementById('modal-task');
-    //     // console.log(modalTaskButton);
-    // } else {
-    //     taskList.innerHTML = '';
-    //     for (let i = 0; i < task.length; i++) {
-    //         let li = document.createElement('li');
-    //         let span = document.createElement('span');
-    //         li.innerHTML = task[i];
-    //         span.innerHTML = ' X';
-    //         span.classList.add('delete-task')
-    //         li.appendChild(span);
-    //         taskList.appendChild(li);
-    //         span.addEventListener('click', fillipDeleteTask);
-    //     }
-    // }
 }
 
 export {

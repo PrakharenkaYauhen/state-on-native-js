@@ -2,9 +2,6 @@
 
 function getJuventus(nextState, state, action) {
 
-    console.log(state);
-    console.log(action);
-
     return nextState = {
         task: state.task,
         modalActive: state.modalActive,

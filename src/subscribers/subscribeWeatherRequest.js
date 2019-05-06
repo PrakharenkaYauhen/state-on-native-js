@@ -45,7 +45,7 @@ let subscribeWeatherRequest = () => {
         second: 'numeric'
     };
 
-    let hours = (weatherObject[2].results.day_length/60/60).toFixed(0);
+    let hours = Math.floor(weatherObject[2].results.day_length/60/60);
     let minutes = Math.floor(weatherObject[2].results.day_length/60 - hours*60);
     let seconds = weatherObject[2].results.day_length - hours*60*60 - minutes*60;
 

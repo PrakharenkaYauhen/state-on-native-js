@@ -11,8 +11,8 @@ let fillipGetWeather = () => {
     let weatherDatesPromise = new Promise((resolve, reject) => {
         navigator.geolocation.getCurrentPosition((position) => {
             if (position) {
-                setTimeout(() => resolve(position.coords), 2000);
-                // resolve(position.coords)
+                // setTimeout(() => resolve(position.coords), 2000);
+                resolve(position.coords)
             } else {
                 reject(new Error('Weather dates is not received'));
             }
