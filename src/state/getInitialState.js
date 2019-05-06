@@ -17,6 +17,8 @@ const getInitialState = () => {
         currentLocalStorageKey: currentLocalStorageKey,
         loadComplete: false,
         weatherObject: null,
+        loadJuventusComplete: false,
+        juventusObject: null,
     };
 };
 

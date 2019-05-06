@@ -10,6 +10,8 @@ function getWeather(nextState, state, action) {
         currentLocalStorageKey: state.currentLocalStorageKey,
         loadComplete: action.payload.loadComplete,
         weatherObject: action.payload.weatherObject,
+        loadJuventusComplete: state.loadJuventusComplete,
+        juventusObject: state.juventusObject,
     }
 }
 

@@ -7,6 +7,7 @@ import { modalTaskInTheList } from './reducer modalTaskInTheList.js';
 import { fillTheCalendar } from './reducer fillTheCalendar.js';
 import { dateChange } from './reducer dateChange.js';
 import { getWeather } from './reducer getWeather.js';
+import { getJuventus } from './reducer getJuventus.js';
 
 const reducer = (state = getInitialState(), action) => {
     let nextState = {};
@@ -30,6 +31,9 @@ const reducer = (state = getInitialState(), action) => {
 
         case 'GET-WEATHER':
             return getWeather(nextState, state, action);
+
+        case 'GET-JUVENTUS':
+            return getJuventus(nextState, state, action);
 
 
         default:

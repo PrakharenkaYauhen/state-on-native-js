@@ -4,6 +4,7 @@ import { subscribeTaskList } from './subscribers/subscribeTaskList.js';
 import { subscribeFillTheCalendar } from './subscribers/subscribeFillTheCalendar.js';
 import { subscribePreloader } from './subscribers/subscribePreloader.js';
 import { subscribeWeatherRequest } from './subscribers/subscribeWeatherRequest.js';
+import { subscribeJuventusRequest } from './subscribers/subscribeJuventusRequest.js';
 import { fillipDeleteTask } from './fillips/fillipDeleteTask.js';
 import { fillipDateChange, } from './fillips/fillipDateChange.js';
 import { fillipAddTaskModal, } from './fillips/fillipAddTaskModal.js';
@@ -22,6 +23,7 @@ const addTaskInTheListButton = document.querySelector('.modal__button_enter');
 const addTaskInTheListInput = document.querySelector('.modal__textarea');
 const theList = document.querySelectorAll('.todo__tasks__list');
 const listTasksLeft = document.getElementById('todo__tasks__left');
+const juventus = document.querySelector('.juventus__content');
 
 let modalTaskButton = document.getElementById('modal-task');
 let weather = document.querySelector('.weather__content');
@@ -33,6 +35,7 @@ store.subscribe(subscribeTaskList);
 store.subscribe(subscribeFillTheCalendar);
 store.subscribe(subscribePreloader);
 store.subscribe(subscribeWeatherRequest);
+store.subscribe(subscribeJuventusRequest);
 
 store.dispatch({}); // Sets the inital state
 
@@ -60,5 +63,6 @@ export {
     addTaskModalCover,
     addTaskInTheListInput,
     theList,
-    weather
+    weather,
+    juventus
 };

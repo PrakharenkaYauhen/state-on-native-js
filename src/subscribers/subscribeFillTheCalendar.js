@@ -3,6 +3,7 @@
 import { store } from './../index.js';
 // import { fillipDeleteTask } from './../fillips/fillipDeleteTask.js';
 import { fillipGetWeather } from './../fillips/fillipGetWeather.js';
+import { fillipGetJuventus } from './../fillips/fillipGetJuventus.js';
 // import imgUrl from './../Sun.png';
 import imgPinBoardURL from './../pin-board.png';
 
@@ -23,6 +24,7 @@ let subscribeFillTheCalendar = () => {
 
     if (currentDayInTheCalendar !== previousDate) {
         fillipGetWeather();
+        fillipGetJuventus();
         previousDate = currentDayInTheCalendar;
     }
 
