@@ -30,14 +30,23 @@ let subscribeTaskList = () => {
         let buttonDelete = document.createElement('button');
         buttonDelete.classList.add('todo__tasks__button');
         buttonDelete.classList.add('todo__tasks__button_delete');
+        let iconDelete = document.createElement('span');
+        iconDelete.classList.add('icon-cross');
+        buttonDelete.appendChild(iconDelete);
         li.appendChild(buttonDelete);
         let buttonDone = document.createElement('button');
         buttonDone.classList.add('todo__tasks__button');
         buttonDone.classList.add('todo__tasks__button_done');
+        let iconDone = document.createElement('span');
+        iconDone.classList.add('icon-checkmark');
+        buttonDone.appendChild(iconDone);
         li.appendChild(buttonDone);
         let buttonCorrect = document.createElement('button');
         buttonCorrect.classList.add('todo__tasks__button');
         buttonCorrect.classList.add('todo__tasks__button_correct');
+        let iconCorrect = document.createElement('span');
+        iconCorrect.classList.add('icon-pencil');
+        buttonCorrect.appendChild(iconCorrect);
         li.appendChild(buttonCorrect);
         theList[0].appendChild(li);
     }

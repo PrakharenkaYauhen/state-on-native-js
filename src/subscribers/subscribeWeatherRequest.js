@@ -49,7 +49,8 @@ let subscribeWeatherRequest = () => {
     let minutes = Math.floor(weatherObject[2].results.day_length/60 - hours*60);
     let seconds = weatherObject[2].results.day_length - hours*60*60 - minutes*60;
 
-    string += `<p class='weather__paragraph'>Day length: ${hours + ':' + minutes + ':' + seconds}</p>
+    string += `<hr />
+    <p class='weather__paragraph'>Day length: ${hours + ':' + minutes + ':' + seconds}</p>
     <p class='weather__paragraph'>Sunrise: ${new Date(Date.parse(weatherObject[2].results.sunrise)).toLocaleString("en-US", options)}</p>
     <p class='weather__paragraph'>Sunrise: ${new Date(Date.parse(weatherObject[2].results.sunset)).toLocaleString("en-US", options)}</p>`
 

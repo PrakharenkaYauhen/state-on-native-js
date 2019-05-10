@@ -7,7 +7,7 @@ import imgPinBoardURL from './../pin-board150.png';
 import imgBallURL from './../ball150.png';
 
 let previousDate = null;
-let previousLocalStorage = null;
+// let previousLocalStorage = null;
 
 let subscribeFillTheCalendar = () => {
     const state = store.getState();
@@ -23,13 +23,18 @@ let subscribeFillTheCalendar = () => {
     const monthes = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     let tableBody = document.getElementById('table-body');
 
+    // console.log(currentDate);
+    // console.log(currentDayInTheCalendar);
+
     if (currentDayInTheCalendar !== previousDate) {
         fillipGetWeather();
         fillipGetJuventus();
         previousDate = currentDayInTheCalendar;
     }
 
-    if (!tableBody.innerHTML) {
+    // if (!tableBody.innerHTML) {
+        tableBody.innerHTML = '';
+        // console.log(currentMonth);
 
         let headerYearMonth = document.getElementById('table-header-year-month');
         headerYearMonth.innerHTML = `${monthes[currentMonth]} ${currentYear}`;
@@ -56,7 +61,7 @@ let subscribeFillTheCalendar = () => {
             }
         }
 
-    }
+    // }
 
     const tableRows = document.querySelectorAll('.todo__table__data_cells');
 
@@ -94,12 +99,10 @@ let subscribeFillTheCalendar = () => {
 
     let localStorageKeysArray = Object.keys(localStorage);
     let checkingLocalStorageKey;
+    // let currentLocalStorage = JSON.stringify(localStorage);
 
-    let currentLocalStorage = JSON.stringify(localStorage);
-
-    // console.log(loadComplete);
-    if (previousLocalStorage !== currentLocalStorage && loadComplete) {
-        previousLocalStorage = currentLocalStorage;
+    if (loadComplete) {
+        // previousLocalStorage = currentLocalStorage;
 
         for (let i = 0; i < tableRows.length; i++) {
             if (parseFloat(tableRows[i].innerHTML) === currentDayInTheCalendar) {
@@ -107,12 +110,14 @@ let subscribeFillTheCalendar = () => {
             } else {
                 tableRows[i].classList.remove('todo__table__data_choisen');
             }
-            
+
             // console.log(localStorageKeysArray.length);
             for (let j = 0; j < localStorageKeysArray.length; j++) {
                 checkingLocalStorageKey = localStorageKeysArray[j].split(' ');
                 // console.log(checkingLocalStorageKey[0]);
-                if (+checkingLocalStorageKey[2] === +tableRows[i].innerHTML && +checkingLocalStorageKey[1] === currentMonth && +checkingLocalStorageKey[0] === currentYear) {
+                if (+checkingLocalStorageKey[2] === +tableRows[i].innerHTML 
+                    && +checkingLocalStorageKey[1] === currentMonth 
+                    && +checkingLocalStorageKey[0] === currentYear) {
                     let imgPinBoard = document.createElement('img');
                     imgPinBoard.setAttribute('src', imgPinBoardURL);
                     imgPinBoard.classList.add('todo__table__pin');
@@ -131,10 +136,12 @@ let subscribeFillTheCalendar = () => {
     const weatherObject = state.weatherObject;
 
     if (weatherObject) {
-    for (let i = 0; i < tableRows.length; i++) {
-        if (parseFloat(tableRows[i].innerHTML) === new Date().getDate()) {
-            // if (weatherObject) {
-                
+        for (let i = 0; i < tableRows.length; i++) {
+            if (parseFloat(tableRows[i].innerHTML) === new Date().getDate() 
+            && +currentDate.getMonth()  === new Date().getMonth() 
+            && +currentDate.getFullYear() === new Date().getFullYear() ) {
+                // if (weatherObject) {
+
                 let img = document.createElement('img');
                 img.setAttribute('src', "https://openweathermap.org/img/w/" + weatherObject[0].weather['0'].icon + ".png");
                 img.classList.add('todo__table__sun');

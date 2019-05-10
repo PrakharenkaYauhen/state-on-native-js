@@ -8,6 +8,7 @@ import { fillTheCalendar } from './reducer fillTheCalendar.js';
 import { dateChange } from './reducer dateChange.js';
 import { getWeather } from './reducer getWeather.js';
 import { getJuventus } from './reducer getJuventus.js';
+import { monthYearChange } from './reducer monthYearChange.js';
 
 const reducer = (state = getInitialState(), action) => {
     let nextState = {};
@@ -28,6 +29,9 @@ const reducer = (state = getInitialState(), action) => {
 
         case 'DATE-CHANGE-CALENDAR':
             return dateChange(nextState, state, action);
+
+        case 'DATE-MONTH-YEAR-CALENDAR':
+            return monthYearChange(nextState, state, action);
 
         case 'GET-WEATHER':
             return getWeather(nextState, state, action);

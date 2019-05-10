@@ -1,4 +1,5 @@
 import './index.css';
+import './style.css';
 import { createStore, reducer } from './App';
 import { subscribeTaskList } from './subscribers/subscribeTaskList.js';
 import { subscribeFillTheCalendar } from './subscribers/subscribeFillTheCalendar.js';
@@ -9,6 +10,7 @@ import { fillipDeleteTask } from './fillips/fillipDeleteTask.js';
 import { fillipDateChange, } from './fillips/fillipDateChange.js';
 import { fillipAddTaskModal, } from './fillips/fillipAddTaskModal.js';
 import { fillipAddTaskInTheList, } from './fillips/fillipAddTaskInTheList.js';
+import { fillipMonthYearChange, } from './fillips/fillipMonthYearChange.js';
 
 const root = document.getElementById('root');
 const taskList = document.getElementById('task-list');
@@ -40,6 +42,7 @@ store.subscribe(subscribeJuventusRequest);
 store.dispatch({}); // Sets the inital state
 
 table.addEventListener('click', fillipDateChange);
+table.addEventListener('click', fillipMonthYearChange);
 table.addEventListener('dblclick', fillipAddTaskModal);
 addTaskModalExit.addEventListener('click', fillipAddTaskModal);
 addTaskModalButton.addEventListener('click', fillipAddTaskModal);

@@ -6,16 +6,15 @@ let fillipDateChange = e => {
     var target = e.target;
 
     const state = store.getState();
+    const currentDate = state.currentDate;
     const currentDayInTheCalendar = state.currentDayInTheCalendar;
-
-    console.log(currentDayInTheCalendar);
 
     if (target.tagName !== 'TD' || parseFloat(target.innerHTML) === currentDayInTheCalendar) return; 
 
     store.dispatch({
         type: 'DATE-CHANGE-CALENDAR',
         payload: {
-            currentDate: new Date(),
+            currentDate: currentDate,
             currentDayInTheCalendar: parseFloat(target.innerHTML)
         },
     })

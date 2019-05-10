@@ -59,6 +59,7 @@ tr:first-child .todo__table__data_cells:nth-last-child(2) {
 
 .todo__table__data_header {
     background: paleturquoise;
+    position: relative;
 }
 
 .todo__table__data_cells {
@@ -436,4 +437,44 @@ table tr:last-child td:last-child {
 
 .juventus__next-game {
     border-top: 1px solid rgba(221, 221, 221, 1);
+}
+
+
+.icon-cross,
+.icon-checkmark,
+.icon-pencil {
+    position: absolute;
+    font-size: 10px;
+    left: 4px;
+    top: 4px;
+}
+
+.icon-undo2,
+.icon-arrow-left2,
+.icon-arrow-right2,
+.icon-redo2 {
+    position: absolute;
+    font-size: 20px;
+    left: 15px;
+    top: 11px;
+    padding: 5px;
+    border: 1px solid #000000;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.icon-undo2:hover,
+.icon-arrow-left2:hover,
+.icon-arrow-right2:hover,
+.icon-redo2:hover {
+    color: #ffffff;
+    border: 1px solid #ffffff;
+}
+
+.icon-undo2:active,
+.icon-arrow-left2:active,
+.icon-arrow-right2:active,
+.icon-redo2:active {
+    color: rgba(221, 221, 221, 1);
+    border: 1px solid rgba(221, 221, 221, 1);
 }
