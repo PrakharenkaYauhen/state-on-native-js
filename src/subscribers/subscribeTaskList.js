@@ -15,6 +15,8 @@ let subscribeTaskList = () => {
         return
     }
 
+    // console.log(3);
+
     // console.log(state);
 
     theList[0].innerHTML = '';

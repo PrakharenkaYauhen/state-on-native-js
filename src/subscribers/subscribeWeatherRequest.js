@@ -8,6 +8,8 @@ let subscribeWeatherRequest = () => {
     const loadComplete = state.loadComplete;
     const weatherObject = state.weatherObject;
 
+    // console.log(4);
+
     if (!loadComplete) return;
 
     let differentInDays = currentDayInTheCalendar - new Date().getDate();

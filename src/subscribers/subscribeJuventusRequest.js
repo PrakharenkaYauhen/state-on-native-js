@@ -3,21 +3,8 @@
 import { store, juventus } from './../index.js';
 
 let previousJuventusString;
-
-let subscribeJuventusRequest = () => {
-    const state = store.getState();
-    const currentDate = state.currentDate;
-    const currentDayInTheCalendar = state.currentDayInTheCalendar;
-    const loadJuventusComplete = state.loadJuventusComplete;
-    const juventusObject = state.juventusObject;
-
-    let currentJuventusString = JSON.stringify(juventusObject);
-
-    if (previousJuventusString !== currentJuventusString) {
-        previousJuventusString = currentJuventusString;
-    } else {
-        return
-    }
+let getTodaysGame = (currentDate, currentDayInTheCalendar, juventusObject) => {
+    const juventusTodayGame = document.querySelector('.juventus__today-game');
 
     const currentYear = currentDate.getFullYear();
     const currentMonth = currentDate.getMonth();
@@ -27,32 +14,49 @@ let subscribeJuventusRequest = () => {
 
     if (juventusObject) {
         for (let i = 0; i < juventusObject[1].events.length; i++) {
-            eventsArray.push(juventusObject[1].events[i].dateEvent);           
+            eventsArray.push(juventusObject[1].events[i].dateEvent);
         }
     }
-    
+
     for (let i = 0; i < eventsArray.length; i++) {
         let newArray = eventsArray[i].split('-');
         if (currentYear === +newArray[0] && (currentMonth + 1) === +newArray[1] && currentDayInTheCalendar === +newArray[2]) {
             for (let i = 0; i < juventusObject[1].events.length; i++) {
                 if (juventusObject[1].events[i].dateEvent === newArray.join('-')) {
-                    todayGame = `<div class='juventus__today-game'>
-                                            <h3 class='juventus__header3'>Today's game:</h3>
-                                            <p class='juventus__paragraph'>Date: ${juventusObject[1].events[i].dateEvent}</p>
-                                            <p class='juventus__paragraph'>Event: ${juventusObject[1].events[i].strEvent}</p>
-                                            <p class='juventus__paragraph'>Tornament: ${juventusObject[1].events[i].strLeague}</p>
-                                            <p class='juventus__paragraph'>Round: ${juventusObject[1].events[i].intRound}</p>
-                                            <p class='juventus__paragraph'>Time: ${juventusObject[1].events[i].strTime}</p>
-                                            </div>`
-                };           
+                    todayGame = `<h3 class='juventus__header3'>Today's game:</h3>
+                                        <p class='juventus__paragraph'>Date: ${juventusObject[1].events[i].dateEvent}</p>
+                                        <p class='juventus__paragraph'>Event: ${juventusObject[1].events[i].strEvent}</p>
+                                        <p class='juventus__paragraph'>Tornament: ${juventusObject[1].events[i].strLeague}</p>
+                                        <p class='juventus__paragraph'>Round: ${juventusObject[1].events[i].intRound}</p>
+                                        <p class='juventus__paragraph'>Time: ${juventusObject[1].events[i].strTime}</p>`;
+                };
             }
             break;
         } else {
-            todayGame = `<div class='juventus__today-game'>
-                                    <h3 class='juventus__header3'>Today's game:</h3>
-                                    <p class='juventus__paragraph'>There is no games today</p>
-                                    </div>`
+            todayGame = `<h3 class='juventus__header3'>Today's game:</h3>
+                                <p class='juventus__paragraph'>There is no games today</p>`
         }
+
+    }
+    juventusTodayGame.innerHTML = todayGame;
+}
+
+let subscribeJuventusRequest = () => {
+    const state = store.getState();
+    const currentDate = state.currentDate;
+    const currentDayInTheCalendar = state.currentDayInTheCalendar;
+    const loadJuventusComplete = state.loadJuventusComplete;
+    const juventusObject = state.juventusObject;
+
+    // console.log(2);
+
+    let currentJuventusString = JSON.stringify(juventusObject);
+
+    if (previousJuventusString !== currentJuventusString) {
+        previousJuventusString = currentJuventusString;
+    } else {
+        getTodaysGame(currentDate, currentDayInTheCalendar, juventusObject);
+        return
     }
 
     if (!loadJuventusComplete) return;
@@ -72,7 +76,8 @@ let subscribeJuventusRequest = () => {
                         <img class='juventus__stadium-photo' src="${juventusObject[0].teams[0].strStadiumThumb}">
                         <p class='juventus__paragraph'>Location: ${juventusObject[0].teams[0].strStadiumLocation}</p>
                         </div>`;
-    string += todayGame;
+                        
+    string += `<div class='juventus__today-game'></div>`;
 
     string += `<div class='juventus__next-game'>
                         <h3 class='juventus__header3'>Next game:</h3>
@@ -84,6 +89,7 @@ let subscribeJuventusRequest = () => {
                         </div>`;
 
     juventus.innerHTML = string;
+    getTodaysGame(currentDate, currentDayInTheCalendar, juventusObject);
 }
 
 export {

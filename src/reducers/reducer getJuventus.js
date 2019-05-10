@@ -4,7 +4,6 @@ function getJuventus(nextState, state, action) {
 
     return nextState = {
         task: state.task,
-        modalActive: state.modalActive,
         currentDate: state.currentDate,
         currentDayInTheCalendar: state.currentDayInTheCalendar,
         currentLocalStorageKey: state.currentLocalStorageKey,

@@ -23,13 +23,13 @@ let subscribeFillTheCalendar = () => {
     const monthes = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     let tableBody = document.getElementById('table-body');
 
-    // console.log(currentDate);
+    // console.log(1);
     // console.log(currentDayInTheCalendar);
 
     if (currentDayInTheCalendar !== previousDate) {
+        previousDate = currentDayInTheCalendar;
         fillipGetWeather();
         fillipGetJuventus();
-        previousDate = currentDayInTheCalendar;
     }
 
     // if (!tableBody.innerHTML) {
@@ -101,7 +101,7 @@ let subscribeFillTheCalendar = () => {
     let checkingLocalStorageKey;
     // let currentLocalStorage = JSON.stringify(localStorage);
 
-    if (loadComplete) {
+    // if (loadComplete) {
         // previousLocalStorage = currentLocalStorage;
 
         for (let i = 0; i < tableRows.length; i++) {
@@ -130,32 +130,32 @@ let subscribeFillTheCalendar = () => {
                     }
                 }
             }
-        }
+        // }
     }
 
     const weatherObject = state.weatherObject;
+    
+    // if (weatherObject) {
+    //     for (let i = 0; i < tableRows.length; i++) {
+    //         if (parseFloat(tableRows[i].innerHTML) === new Date().getDate() 
+    //         && +currentDate.getMonth()  === new Date().getMonth() 
+    //         && +currentDate.getFullYear() === new Date().getFullYear() ) {
+    //             // if (weatherObject) {
 
-    if (weatherObject) {
-        for (let i = 0; i < tableRows.length; i++) {
-            if (parseFloat(tableRows[i].innerHTML) === new Date().getDate() 
-            && +currentDate.getMonth()  === new Date().getMonth() 
-            && +currentDate.getFullYear() === new Date().getFullYear() ) {
-                // if (weatherObject) {
-
-                let img = document.createElement('img');
-                img.setAttribute('src', "https://openweathermap.org/img/w/" + weatherObject[0].weather['0'].icon + ".png");
-                img.classList.add('todo__table__sun');
-                tableRows[i].appendChild(img);
-                for (let j = 1; j <= 4; j++) {
-                    let img = document.createElement('img');
-                    img.setAttribute('src', "https://openweathermap.org/img/w/" + weatherObject[1].list[j * 8 + 1 + ''].weather['0'].icon + ".png");
-                    img.classList.add('todo__table__sun');
-                    tableRows[i + j].appendChild(img);
-                }
-                break;
-            }
-        }
-    }
+    //             let img = document.createElement('img');
+    //             img.setAttribute('src', "https://openweathermap.org/img/w/" + weatherObject[0].weather['0'].icon + ".png");
+    //             img.classList.add('todo__table__sun');
+    //             tableRows[i].appendChild(img);
+    //             for (let j = 1; j <= 4; j++) {
+    //                 let img = document.createElement('img');
+    //                 img.setAttribute('src', "https://openweathermap.org/img/w/" + weatherObject[1].list[j * 8 + 1 + ''].weather['0'].icon + ".png");
+    //                 img.classList.add('todo__table__sun');
+    //                 tableRows[i + j].appendChild(img);
+    //             }
+    //             break;
+    //         }
+    //     }
+    // }
 }
 
 export {

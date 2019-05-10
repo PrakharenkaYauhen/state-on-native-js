@@ -19,6 +19,8 @@ function dateChange(nextState, state, action) {
         currentLocalStorageKey: currentLocalStorageKey,
         loadComplete: false,
         weatherObject: state.weatherObject,
+        loadJuventusComplete: state.loadJuventusComplete,
+        juventusObject: state.juventusObject,
     }
     return nextState;
 }

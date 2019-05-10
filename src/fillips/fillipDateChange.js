@@ -9,7 +9,7 @@ let fillipDateChange = e => {
     const currentDate = state.currentDate;
     const currentDayInTheCalendar = state.currentDayInTheCalendar;
 
-    if (target.tagName !== 'TD' || parseFloat(target.innerHTML) === currentDayInTheCalendar) return; 
+    if (target.tagName !== 'TD' || parseFloat(target.innerHTML) === currentDayInTheCalendar || isNaN(parseFloat(target.innerHTML))) return; 
 
     store.dispatch({
         type: 'DATE-CHANGE-CALENDAR',
