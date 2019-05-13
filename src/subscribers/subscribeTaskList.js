@@ -15,7 +15,7 @@ let subscribeTaskList = () => {
         return
     }
 
-    // console.log(3);
+    console.log('subscribeTaskList');
 
     // console.log(state);
 

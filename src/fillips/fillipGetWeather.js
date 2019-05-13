@@ -10,13 +10,42 @@ let fillipGetWeather = () => {
     const weatherObject = state.weatherObject;
 
     if (weatherObject) {
-        store.dispatch({
-            type: 'GET-WEATHER',
-            payload: {
-                loadComplete: true,
-                weatherObject: weatherObject,
-            },
+        let weatherDatesPromise = new Promise((resolve, reject) => {
+            navigator.geolocation.getCurrentPosition((position) => {
+                if (position) {
+                    resolve(position.coords)
+                } else {
+                    reject(new Error('Weather dates is not received'));
+                }
+            })
+        });
+
+        weatherDatesPromise.then(coords => {
+            return Promise.all([
+                fetch('https://api.sunrise-sunset.org/json?lat=' + coords.latitude.toFixed(6) + '&lng=' + coords.longitude.toFixed(6) + '&date=' + currentDate.getFullYear() + '-' + (1 + currentDate.getMonth()) + '-' + currentDayInTheCalendar + '&formatted=0'),
+            ])
         })
+            .then(res => {
+                return res.map(wetherObject => wetherObject.json())
+            })
+            .then(res => {
+                Promise.all(res)
+                    .then(
+                        (result) => {
+                            weatherObject[2] = result[0];
+                            store.dispatch({
+                                type: 'GET-WEATHER',
+                                payload: {
+                                    loadComplete: true,
+                                    weatherObject: weatherObject,
+                                },
+                            })
+                        },
+                        (error) => {
+                            console.log(error);
+                        }
+                    )
+            })
     } else {
         let weatherDatesPromise = new Promise((resolve, reject) => {
             navigator.geolocation.getCurrentPosition((position) => {
@@ -46,7 +75,7 @@ let fillipGetWeather = () => {
                 Promise.all(res)
                     .then(
                         (result) => {
-                            // console.log(result);
+                            console.log(result);
                             store.dispatch({
                                 type: 'GET-WEATHER',
                                 payload: {

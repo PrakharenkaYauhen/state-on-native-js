@@ -6,6 +6,8 @@ let previousJuventusString;
 let getTodaysGame = (currentDate, currentDayInTheCalendar, juventusObject) => {
     const juventusTodayGame = document.querySelector('.juventus__today-game');
 
+    if (!juventusTodayGame) return;
+
     const currentYear = currentDate.getFullYear();
     const currentMonth = currentDate.getMonth();
 
@@ -48,14 +50,16 @@ let subscribeJuventusRequest = () => {
     const loadJuventusComplete = state.loadJuventusComplete;
     const juventusObject = state.juventusObject;
 
-    // console.log(2);
+    // console.log('subscribeJuventusRequest');
 
     let currentJuventusString = JSON.stringify(juventusObject);
 
     if (previousJuventusString !== currentJuventusString) {
         previousJuventusString = currentJuventusString;
+        console.log('subscribeJuventusRequest 1-st load');
     } else {
         getTodaysGame(currentDate, currentDayInTheCalendar, juventusObject);
+        console.log('subscribeJuventusRequest 2-nd load');
         return
     }
 

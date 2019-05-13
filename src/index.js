@@ -36,7 +36,7 @@ const store = createStore(reducer);
 store.subscribe(subscribeTaskList);
 store.subscribe(subscribeFillTheCalendar);
 store.subscribe(subscribePreloader);
-// store.subscribe(subscribeWeatherRequest);
+store.subscribe(subscribeWeatherRequest);
 store.subscribe(subscribeJuventusRequest);
 
 store.dispatch({}); // Sets the inital state
