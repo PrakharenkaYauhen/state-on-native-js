@@ -60,6 +60,22 @@ tr:first-child .todo__table__data_cells:nth-last-child(2) {
 .todo__table__data_header {
     background: paleturquoise;
     position: relative;
+    font-size: 20px;
+    border: 1px solid paleturquoise;
+}
+
+#table-body tr:first-child td {
+    border: 0.5px solid paleturquoise;
+    border-bottom: 3px double paleturquoise;
+}
+
+.todo__table__data_name {
+    color: blue;
+}
+
+.todo__table__data_name:last-child,
+.todo__table__data_name:nth-last-child(2) {
+    color: red;
 }
 
 .todo__table__data_cells {
@@ -69,26 +85,26 @@ tr:first-child .todo__table__data_cells:nth-last-child(2) {
 
 .todo__table__sun {
     position: absolute;
-    width: 20px;
+    width: 18px;
     right: 0;
-    top: 0;
+    top: -2px;
 }
 
 .todo__table__pin {
     position: absolute;
-    width: 15px;
+    width: 13px;
     left: 0;
     top: 0;
 }
 .todo__table__ball {
     position: absolute;
-    width: 15px;
-    left: 15px;
+    width: 13px;
+    left: 13px;
     top: 2px;
 }
 
 .todo__table__data_choisen {
-    background: bisque;
+    background: #EFEFEF;
 }
 
 .todo__table__data_tasks {

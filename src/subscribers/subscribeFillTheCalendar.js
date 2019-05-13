@@ -26,9 +26,6 @@ let subscribeFillTheCalendar = () => {
     const monthes = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     let tableBody = document.getElementById('table-body');
 
-    console.log('subscribeFillTheCalendar');
-    // console.log(currentDayInTheCalendar);
-
     if (currentDayInTheCalendar !== previousDate) {
         previousDate = currentDayInTheCalendar;
         fillipGetWeather();
@@ -37,8 +34,10 @@ let subscribeFillTheCalendar = () => {
 
     let headerYearMonth = document.getElementById('table-header-year-month');
     headerYearMonth.innerHTML = `${monthes[currentMonth]} ${currentYear}`;
-
-    if (currentYear !== previousYear && currentMonth !== previousMonth && !tableBody.innerHTML) {
+    if (((currentYear !== previousYear || currentMonth !== previousMonth) && !tableBody.innerHTML) 
+    || ((currentYear !== previousYear || currentMonth !== previousMonth) && tableBody.innerHTML)) {
+        console.log('subscribeFillTheCalendar full');
+        tableBody.innerHTML = '';
         let rowOfDays = document.createElement('tr');
         for (let i = 0; i < 7; i++) {
             let td = document.createElement('td');
@@ -60,7 +59,12 @@ let subscribeFillTheCalendar = () => {
                 tableBody.appendChild(row);
             }
         }
+
+        previousYear = currentYear;
+        previousMonth = currentMonth;
     }
+
+    console.log('subscribeFillTheCalendar short');
 
     const tableRows = document.querySelectorAll('.todo__table__data_cells');
 

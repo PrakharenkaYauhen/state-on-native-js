@@ -9,15 +9,11 @@ let fillipMonthYearChange = e => {
 
     const state = store.getState();
     const currentDate = state.currentDate;
-    // const currentDayInTheCalendar = state.currentDayInTheCalendar;
     const currentYear = currentDate.getFullYear();
     const currentMonth = currentDate.getMonth();
 
-    // console.log(currentDayInTheCalendar, currentYear, currentMonth);
-
     let newDate;
-
-    // console.log(target.className);
+    let currentDayInTheCalendar = 1;
 
     switch (target.className) {
         case 'icon-undo2':
@@ -40,11 +36,16 @@ let fillipMonthYearChange = e => {
             break;
     }
 
+    let currentLocalStorageKey = newDate.getFullYear() + ' ' + newDate.getMonth() + ' ' + currentDayInTheCalendar;
+    let todaysTasks = JSON.parse(localStorage.getItem(currentLocalStorageKey));
+
     store.dispatch({
         type: 'DATE-MONTH-YEAR-CALENDAR',
         payload: {
             currentDate: newDate,
-            currentDayInTheCalendar: 1,
+            currentDayInTheCalendar: currentDayInTheCalendar,
+            currentLocalStorageKey: currentLocalStorageKey,
+            task: todaysTasks,
         },
     })
 }

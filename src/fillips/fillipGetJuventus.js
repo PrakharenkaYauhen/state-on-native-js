@@ -21,7 +21,7 @@ let fillipGetJuventus = () => {
         Promise.all([
             fetch('https://www.thesportsdb.com/api/v1/json/1/searchteams.php?t=Juventus'),
             fetch('https://www.thesportsdb.com/api/v1/json/1/eventsnext.php?id=133676'),
-            fetch('https://www.thesportsdb.com/api/v1/json/1/searchplayers.php?p=Danny%20Welbeck'),
+            fetch('https://www.thesportsdb.com/api/v1/json/1/searchplayers.php?t=Juventus'),
         ])
             .then(res => {
                 // console.log(res);
@@ -33,14 +33,6 @@ let fillipGetJuventus = () => {
                     .then(
                         (result) => {
                             console.log(result);
-
-                            // let currentJuventusString = JSON.stringify(result);
-
-                            // if (previousJuventusString !== currentJuventusString) {
-                            //     previousJuventusString = currentJuventusString;
-                            // } else {
-                            //     return
-                            // }
 
                             outer: for (let i = 0; i < result[1].events.length; i++) {
                                 let localStorageKeyString = result[1].events[i].dateEvent.split('-');

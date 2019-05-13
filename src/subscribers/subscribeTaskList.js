@@ -17,8 +17,6 @@ let subscribeTaskList = () => {
 
     console.log('subscribeTaskList');
 
-    // console.log(state);
-
     theList[0].innerHTML = '';
 
     if (!task || task.length === 0) return theList[0].innerHTML = "You don't have any task now";
